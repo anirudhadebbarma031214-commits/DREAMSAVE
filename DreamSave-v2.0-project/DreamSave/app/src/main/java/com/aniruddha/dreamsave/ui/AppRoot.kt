@@ -90,6 +90,7 @@ private val Tabs = listOf(
 
 @Composable
 fun AppRoot(viewModel: DreamSaveViewModel) {
+    var showDiwaliIntro by remember { mutableStateOf(true) }
     val data by viewModel.data.collectAsState()
     val celebrationId by viewModel.celebration.collectAsState()
 
@@ -174,6 +175,10 @@ fun AppRoot(viewModel: DreamSaveViewModel) {
                     saved = Calc.savedOf(celebrationGoal, data.deposits),
                     onDismiss = viewModel::dismissCelebration
                 )
+            }
+
+            if (showDiwaliIntro) {
+                DiwaliIntro(onContinue = { showDiwaliIntro = false })
             }
         }
     }
